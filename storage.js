@@ -82,6 +82,8 @@ function saveItem(data) {
     supplier:      data.supplier || "",
     catalogNumber: data.catalogNumber || "",
     notes:         data.notes || "",
+    presetQty:     data.presetQty  ? Number(data.presetQty)  : null,
+    presetUnit:    data.presetUnit || null,
     status:        data.status || "active",
     createdAt:     now(),
     updatedAt:     now(),

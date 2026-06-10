@@ -623,21 +623,12 @@ const Pages = {
       sendBtn.disabled      = false;
       sendBtn.style.opacity = "1";
 
-      // Seed order qty defaults — use last order if saved, else qty 1 / Units
+      // Seed order qty defaults — use preset saved on item, else qty 1 / Units
       items.forEach((item) => {
         if (!orderQtys.has(item.id)) {
-          try {
-            const raw = localStorage.getItem(`lastOrder_${item.id}`);
-            if (raw) {
-              const { qty, unit } = JSON.parse(raw);
-              orderQtys.set(item.id, {
-                qty:  Math.max(1, parseInt(qty) || 1),
-                unit: UNIT_OPTIONS.includes(unit) ? unit : "Units",
-              });
-              return;
-            }
-          } catch { /* ignore parse errors */ }
-          orderQtys.set(item.id, { qty: 1, unit: "Units" });
+          const presetQty  = item.presetQty  ? Math.max(1, parseInt(item.presetQty)  || 1) : 1;
+          const presetUnit = item.presetUnit && UNIT_OPTIONS.includes(item.presetUnit) ? item.presetUnit : "Units";
+          orderQtys.set(item.id, { qty: presetQty, unit: presetUnit });
         }
       });
 
@@ -1229,7 +1220,7 @@ const Modals = {
           Storage.saveReorderQueue([]);
           selectedItems.forEach((item) => {
             Storage.logActivity("order_sent", item.name, item.id);
-            localStorage.setItem(`lastOrder_${item.id}`, JSON.stringify({ qty: item.quantity, unit: item.unit }));
+            Storage.updateItem(item.id, { presetQty: item.quantity, presetUnit: item.unit });
           });
           App.updateBadges();
           closeModal();
@@ -1319,6 +1310,8 @@ const Importer = {
     supplier:      "Supplier",
     catalogNumber: "Catalog Number",
     notes:         "Notes",
+    presetQty:     "Preset Quantity",
+    presetUnit:    "Preset Unit",
   },
 
   ALIASES: {
@@ -1326,6 +1319,8 @@ const Importer = {
     supplier:      ["supplier", "vendor", "manufacturer", "brand"],
     catalogNumber: ["catalog", "catalog number", "catalog#", "catalog no", "cat #", "cat no", "sku", "part number", "item number", "part #"],
     notes:         ["notes", "note", "comment", "comments", "remarks", "memo"],
+    presetQty:     ["preset quantity", "preset qty", "order quantity", "order qty", "default quantity", "default qty", "reorder quantity", "reorder qty"],
+    presetUnit:    ["preset unit", "order unit", "default unit", "reorder unit", "unit"],
   },
 
   // ── Build Settings UI section ────────────────────────────────────────────
@@ -1479,7 +1474,7 @@ const Importer = {
         const field = mapping[header];
         if (!field) return;
         const val = row[i] || "";
-        if (field === "quantity" || field === "reorderThreshold") {
+        if (field === "quantity" || field === "reorderThreshold" || field === "presetQty") {
           item[field] = parseFloat(val) || 0;
         } else {
           item[field] = val;
