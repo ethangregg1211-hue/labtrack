@@ -2,7 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   try {
-    Storage.seedSampleData();
     App.init();
   } catch (err) {
     console.error("LabTrack init error:", err);
@@ -488,7 +487,7 @@ const Pages = {
         listWrap.appendChild(
           el("div", { className: "no-items-msg" },
             el("strong", { textContent: query ? "No results" : "No items yet" }),
-            el("span",   { textContent: query ? "Try a different search" : "Add items to start building your order list" })
+            el("span",   { textContent: query ? "Try a different search" : "Tap + Add to get started" })
           )
         );
         updatePushBar();

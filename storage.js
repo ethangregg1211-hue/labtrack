@@ -201,25 +201,6 @@ function getActivity() {
   return readJSON(KEYS.ACTIVITY) || [];
 }
 
-// ── Seed data ──────────────────────────────────────────────────────────────
-
-function seedSampleData() {
-  if (getItems().length > 0) return;
-
-  const samples = [
-    { name: "Ethanol 200 proof",   category: "Solvents",        quantity: 2,  unit: "liters",  reorderThreshold: 5,  supplier: "Sigma-Aldrich", catalogNumber: "459836",   notes: "Store in flammable cabinet" },
-    { name: "PBS 10x",             category: "Buffers",          quantity: 8,  unit: "liters",  reorderThreshold: 4,  supplier: "Thermo Fisher", catalogNumber: "AM9625",   notes: "" },
-    { name: "Trypan Blue 0.4%",    category: "Reagents",         quantity: 1,  unit: "vials",   reorderThreshold: 3,  supplier: "Sigma-Aldrich", catalogNumber: "T8154",    notes: "" },
-    { name: "DMEM High Glucose",   category: "Cell Culture",     quantity: 6,  unit: "bottles", reorderThreshold: 3,  supplier: "Thermo Fisher", catalogNumber: "11965118", notes: "Keep at 4C" },
-    { name: "Fetal Bovine Serum",  category: "Cell Culture",     quantity: 0,  unit: "vials",   reorderThreshold: 2,  supplier: "Sigma-Aldrich", catalogNumber: "F2442",    notes: "Heat-inactivated lot" },
-    { name: "Agarose LE",          category: "Electrophoresis",  quantity: 12, unit: "grams",   reorderThreshold: 5,  supplier: "Bio-Rad",       catalogNumber: "161-3100", notes: "" },
-    { name: "Proteinase K",        category: "Enzymes",          quantity: 3,  unit: "vials",   reorderThreshold: 4,  supplier: "Qiagen",        catalogNumber: "19131",    notes: "Store at -20C" },
-    { name: "RIPA Buffer",         category: "Buffers",          quantity: 2,  unit: "ml",      reorderThreshold: 10, supplier: "Thermo Fisher", catalogNumber: "89900",    notes: "Add protease inhibitor before use" },
-  ];
-
-  samples.forEach((s) => saveItem(s));
-}
-
 // ── Public API ─────────────────────────────────────────────────────────────
 
 window.Storage = {
@@ -233,7 +214,6 @@ window.Storage = {
   saveSettings,
   getActivity,
   logActivity,
-  seedSampleData,
   getReorderQueue,
   saveReorderQueue,
   getOrderHistory,
