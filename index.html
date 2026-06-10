@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>LabTrack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <!-- ── Mobile top bar ───────────────────────────────────── -->
+    <header class="topbar" id="topbar">
+      <div class="topbar-brand">
+        <span class="topbar-logo">LT</span>
+        <span class="topbar-name" id="topbar-lab-name">LabTrack</span>
+      </div>
+      <button class="alert-badge" id="alert-badge" aria-label="Items needing reorder" hidden>
+        <span class="alert-dot"></span>
+        <span class="alert-count" id="alert-count">0</span>
+      </button>
+    </header>
+
+    <!-- ── Desktop sidebar ──────────────────────────────────── -->
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="sidebar-brand">
+        <span class="sidebar-logo">LT</span>
+        <div class="sidebar-brand-text">
+          <span class="sidebar-title">LabTrack</span>
+          <span class="sidebar-subtitle" id="sidebar-lab-name"></span>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <div class="sidebar-pill" id="sidebar-pill"></div>
+        <li class="sidebar-item">
+          <button class="sidebar-btn" data-page="dashboard">
+            <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/>
+              <rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/>
+              <rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/>
+              <rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/>
+            </svg>
+            Dashboard
+          </button>
+        </li>
+        <li class="sidebar-item">
+          <button class="sidebar-btn" data-page="inventory">
+            <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="2" y="3" width="16" height="3" rx="1" fill="currentColor"/>
+              <rect x="2" y="8.5" width="16" height="3" rx="1" fill="currentColor" opacity=".5"/>
+              <rect x="2" y="14" width="16" height="3" rx="1" fill="currentColor" opacity=".3"/>
+            </svg>
+            Inventory
+          </button>
+        </li>
+        <li class="sidebar-item">
+          <button class="sidebar-btn" data-page="reorder">
+            <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/>
+              <path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+            Reorder Queue
+            <span class="sidebar-badge" id="sidebar-badge" hidden>0</span>
+          </button>
+        </li>
+        <li class="sidebar-item">
+          <button class="sidebar-btn" data-page="history">
+            <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M3 10a7 7 0 1 0 7-7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+              <path d="M3 4v6h6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            History
+          </button>
+        </li>
+        <li class="sidebar-item">
+          <button class="sidebar-btn" data-page="settings">
+            <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+            Settings
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- ── Main content area ────────────────────────────────── -->
+    <main class="main" id="main">
+      <!-- Pages are rendered here by app.js -->
+    </main>
+
+    <!-- ── Mobile bottom tab bar ────────────────────────────── -->
+    <nav class="tabbar" id="tabbar" aria-label="Tab navigation">
+      <button class="tab-btn" data-page="dashboard" aria-label="Dashboard">
+        <svg class="tab-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="2" y="2" width="7" height="7" rx="1.5" fill="currentColor"/>
+          <rect x="11" y="2" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/>
+          <rect x="2" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/>
+          <rect x="11" y="11" width="7" height="7" rx="1.5" fill="currentColor" opacity=".4"/>
+        </svg>
+        <span>Home</span>
+      </button>
+      <button class="tab-btn" data-page="inventory" aria-label="Inventory">
+        <svg class="tab-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="2" y="3" width="16" height="3" rx="1" fill="currentColor"/>
+          <rect x="2" y="8.5" width="16" height="3" rx="1" fill="currentColor" opacity=".5"/>
+          <rect x="2" y="14" width="16" height="3" rx="1" fill="currentColor" opacity=".3"/>
+        </svg>
+        <span>Inventory</span>
+      </button>
+      <button class="tab-btn" data-page="reorder" aria-label="Reorder Queue">
+        <div class="tab-icon-wrap">
+          <svg class="tab-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 6v4l2.5 2.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          </svg>
+          <span class="tab-badge" id="tab-badge" hidden>0</span>
+        </div>
+        <span>Reorder</span>
+      </button>
+      <button class="tab-btn" data-page="history" aria-label="Order History">
+        <svg class="tab-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 10a7 7 0 1 0 7-7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+          <path d="M3 4v6h6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>History</span>
+      </button>
+      <button class="tab-btn" data-page="settings" aria-label="Settings">
+        <svg class="tab-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+          <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- ── Modal backdrop ────────────────────────────────────── -->
+    <div class="modal-backdrop" id="modal-backdrop" hidden></div>
+
+    <!-- ── Toast container ───────────────────────────────────── -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <script src="storage.js"></script>
+    <script src="email.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
