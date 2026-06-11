@@ -43,6 +43,15 @@ const Email = {
     await this._loadSDK();
     emailjs.init(s.emailjsPublicKey);
 
+    const serviceId  = s.emailjsServiceId;
+    const templateId = s.emailjsTemplateId;
+
+    console.log("LabTrack — EmailJS send (values passed exactly as stored in localStorage)");
+    console.log("  serviceId:  ", serviceId);
+    console.log("  templateId: ", templateId);
+    console.log("  publicKey:  ", s.emailjsPublicKey);
+    console.log("  to_email:   ", toEmail);
+
     const params = {
       to_email:        toEmail,
       subject:         `Lab Order Request - ${s.labName || "Lab"}`,
@@ -52,14 +61,9 @@ const Email = {
       item_count:      String(items.length),
     };
 
-    console.log("LabTrack — EmailJS credentials (exact values passed to SDK)");
-    console.log("  serviceId:  ", s.emailjsServiceId);
-    console.log("  templateId: ", s.emailjsTemplateId);
-    console.log("  publicKey:  ", s.emailjsPublicKey);
-    console.log("  to_email:   ", toEmail);
-
+    console.log("Sending with:", serviceId, templateId, s.emailjsPublicKey);
     try {
-      const result = await emailjs.send(s.emailjsServiceId, s.emailjsTemplateId, params);
+      const result = await emailjs.send(serviceId, templateId, params);
       console.log("EmailJS success:", result);
       return result;
     } catch (err) {
