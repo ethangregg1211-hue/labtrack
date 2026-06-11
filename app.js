@@ -1311,8 +1311,8 @@ const Importer = {
 
   FIELDS: {
     name:          "Item Name",
-    supplier:      "Supplier",
-    catalogNumber: "Catalog Number",
+    supplier:      "Company",
+    catalogNumber: "Catalog #",
     notes:         "Notes",
     presetQty:     "Preset Quantity",
     presetUnit:    "Preset Unit",
@@ -1320,8 +1320,8 @@ const Importer = {
 
   ALIASES: {
     name:          ["name", "item", "item name", "product", "reagent", "chemical", "material", "description"],
-    supplier:      ["supplier", "vendor", "manufacturer", "brand"],
-    catalogNumber: ["catalog", "catalog number", "catalog#", "catalog no", "cat #", "cat no", "sku", "part number", "item number", "part #"],
+    supplier:      ["supplier", "company", "vendor", "manufacturer", "brand"],
+    catalogNumber: ["catalog #", "catalog", "catalog number", "catalog#", "catalog no", "cat #", "cat no", "sku", "part number", "item number", "part #"],
     notes:         ["notes", "note", "comment", "comments", "remarks", "memo"],
     presetQty:     ["preset quantity", "preset qty", "order quantity", "order qty", "default quantity", "default qty", "reorder quantity", "reorder qty"],
     presetUnit:    ["preset unit", "order unit", "default unit", "reorder unit", "unit"],
