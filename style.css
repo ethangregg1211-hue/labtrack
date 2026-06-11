@@ -1540,13 +1540,14 @@ svg {
 .reorder-queue-sub { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .reorder-queue-qty { font-size: 12px; font-family: var(--font-mono); color: var(--muted); margin-top: 4px; }
 .reorder-queue-remove {
-  width: 32px; height: 32px; border-radius: 50%;
-  border: 1px solid var(--border); background: var(--surface);
-  color: var(--muted); cursor: pointer;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid var(--red); background: transparent;
+  color: var(--red); cursor: pointer;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  transition: background 0.12s, color 0.12s;
+  transition: background 0.12s;
 }
-.reorder-queue-remove:hover { background: var(--red-light); color: var(--red); border-color: transparent; }
+.reorder-queue-remove:hover,
+.reorder-queue-remove:active { background: var(--red-light); }
 
 /* ── Order history ───────────────────────────────────────────────────────── */
 .history-list { display: flex; flex-direction: column; gap: 10px; }

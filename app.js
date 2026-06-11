@@ -624,10 +624,14 @@ const Pages = {
       sendBtn.style.opacity = "1";
 
       // Seed order qty defaults — use preset saved on item, else qty 1 / Units
+      const matchUnit = (val) => val
+        ? (UNIT_OPTIONS.find((u) => u.toLowerCase() === val.toLowerCase()) || "Units")
+        : "Units";
+
       items.forEach((item) => {
         if (!orderQtys.has(item.id)) {
-          const presetQty  = item.presetQty  ? Math.max(1, parseInt(item.presetQty)  || 1) : 1;
-          const presetUnit = item.presetUnit && UNIT_OPTIONS.includes(item.presetUnit) ? item.presetUnit : "Units";
+          const presetQty  = item.presetQty  ? Math.max(1, parseInt(item.presetQty) || 1) : 1;
+          const presetUnit = matchUnit(item.presetUnit);
           orderQtys.set(item.id, { qty: presetQty, unit: presetUnit });
         }
       });
