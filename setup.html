@@ -449,7 +449,18 @@
       </li>
       <li>
         <div class="step-bubble">4</div>
-        <div>In the <strong>Body</strong>, delete everything and type only: <code>&#123;&#123;order_details&#125;&#125;</code></div>
+        <div>
+          <div class="callout warn" style="margin-top:0; margin-bottom:12px;">
+            <span class="callout-icon">⚠️</span>
+            <div>To edit the body, click <strong>"Edit Content"</strong> in the top right of the Content area, then switch to <strong>Code Editor</strong> view.</div>
+          </div>
+          In the <strong>Body</strong>, delete everything and paste exactly this:
+          <pre style="margin-top:10px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:ui-monospace,'SF Mono',monospace; font-size:13px; color:var(--navy); line-height:1.7; overflow-x:auto; white-space:pre;">Lab: &#123;&#123;lab_name&#125;&#125;
+Requested by: &#123;&#123;researcher_name&#125;&#125;
+Items to reorder:
+&#123;&#123;order_list&#125;&#125;
+Sent from LabTrack</pre>
+        </div>
       </li>
       <li>
         <div class="step-bubble">5</div>
