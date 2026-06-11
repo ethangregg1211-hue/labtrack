@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LabTrack — New User Setup Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #18305a;
+      --blue:    #2563eb;
+      --blue-lt: #eff6ff;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --border:  #e2e8f0;
+      --surface: #f8fafc;
+      --white:   #ffffff;
+      --red:     #ef4444;
+      --shadow:  0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background: var(--surface);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sticky progress bar ── */
+    #progress-bar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #progress-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    #progress-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    #progress-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* ── Page layout ── */
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 64px;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      padding: 40px 0 32px;
+      text-align: center;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .logo-mark {
+      width: 44px; height: 44px;
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+    .page-subtitle {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+    .page-intro {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── Section cards ── */
+    .step-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 28px 28px 32px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 480px) {
+      .step-card { padding: 22px 18px 26px; }
+    }
+
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* ── Numbered step list ── */
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .steps-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .step-bubble {
+      width: 24px; height: 24px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .steps-list li strong { font-weight: 600; color: var(--navy); }
+
+    /* ── Code / ID chips ── */
+    code {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    /* ── Callout boxes ── */
+    .callout {
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .callout-icon { font-size: 16px; flex-shrink: 0; line-height: 1.4; }
+    .callout.blue  { background: var(--blue-lt); color: #1d4ed8; }
+    .callout.navy  { background: #eef2f8;        color: var(--navy); }
+    .callout.warn  { background: #fefce8;        color: #854d0e; }
+
+    /* ── URL link chips ── */
+    .url-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 12px;
+      word-break: break-all;
+    }
+    .url-chip:hover { background: #dbeafe; }
+
+    /* ── Images ── */
+    .setup-img-wrap {
+      margin-top: 20px;
+    }
+    .setup-img-wrap img {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: block;
+    }
+    .img-caption {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 8px;
+      text-align: center;
+    }
+    .img-note {
+      font-size: 13px;
+      color: var(--red);
+      font-weight: 600;
+      margin-top: 6px;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      text-align: center;
+      padding: 32px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .site-footer strong { color: var(--navy); }
+  </style>
+</head>
+<body>
+
+<!-- ── Sticky progress bar ── -->
+<div id="progress-bar-wrap">
+  <span id="progress-label">Step 1 of 9</span>
+  <div id="progress-track"><div id="progress-fill"></div></div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="logo-row">
+      <div class="logo-mark">LT</div>
+      <span class="logo-name">LabTrack</span>
+    </div>
+    <div class="page-subtitle">New User Setup Guide</div>
+    <p class="page-intro">Follow these steps to get LabTrack set up on your phone or computer. It takes about 10 minutes.</p>
+  </header>
+
+  <!-- ── Step 1 ── -->
+  <section class="step-card" data-step="1">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Open the App</div>
+        <div class="step-desc">LabTrack runs entirely in your browser — no download or installation needed.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Open any browser on your phone or computer and go to the LabTrack URL:
+          <br><a class="url-chip" href="https://ethangregg1211-hue.github.io/labtrack" target="_blank">
+            🔗 ethangregg1211-hue.github.io/labtrack
+          </a>
+        </div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>The app loads instantly. <strong>No account, no login, no download required.</strong> Your data stays on your device in your browser's local storage.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── Step 2 ── -->
+  <section class="step-card" data-step="2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Add to Your iPhone Home Screen</div>
+        <div class="step-desc">Optional, but recommended — makes it feel and behave like a native app.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Open the LabTrack URL in <strong>Safari</strong> (this must be Safari — Chrome does not support adding to home screen on iPhone).</div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Tap the <strong>Share button</strong> — the box with an arrow pointing up at the bottom of the screen.</div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>Scroll down in the Share menu and tap <strong>"Add to Home Screen."</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">4</div>
+        <div>Name it <strong>LabTrack</strong> and tap <strong>Add</strong> in the top right corner.</div>
+      </li>
+      <li>
+        <div class="step-bubble">5</div>
+        <div>The LabTrack icon will appear on your home screen. Tap it to open the app fullscreen, just like a native app.</div>
+      </li>
+    </ol>
+    <div class="callout blue">
+      <span class="callout-icon">💡</span>
+      <div>Once added to your home screen, LabTrack opens without the browser address bar and feels completely native.</div>
+    </div>
+  </section>
+
+  <!-- ── Step 3 ── -->
+  <section class="step-card" data-step="3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Create Your EmailJS Account</div>
+        <div class="step-desc">LabTrack uses EmailJS to send order request emails directly from your browser — no server or backend needed.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Go to <strong>emailjs.com</strong> and click <strong>Sign Up.</strong>
+          <br><a class="url-chip" href="https://emailjs.com" target="_blank">🔗 emailjs.com</a>
+        </div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Create a free account. The free plan allows <strong>200 emails per month</strong> and requires no credit card.</div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>Check your inbox and <strong>verify your email address</strong> to activate your account.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── Step 4 ── -->
+  <section class="step-card" data-step="4">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Connect Your Email — Service ID</div>
+        <div class="step-desc">This links your Gmail or other email account so EmailJS can send from it.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>In the EmailJS dashboard, click <strong>"Email Services"</strong> in the left sidebar.</div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Click <strong>"Add New Service."</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>Choose <strong>Gmail</strong> (or your email provider).</div>
+      </li>
+      <li>
+        <div class="step-bubble">4</div>
+        <div>Click <strong>"Connect Account"</strong> and sign in with your email address.</div>
+      </li>
+      <li>
+        <div class="step-bubble">5</div>
+        <div>Click <strong>"Create Service."</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">6</div>
+        <div>Your service will appear in the list. <strong>Copy the Service ID</strong> — it looks like: <code>service_xxxxxxx</code></div>
+      </li>
+    </ol>
+
+    <div class="setup-img-wrap">
+      <img src="setup-img-services.png" alt="EmailJS Email Services page showing the Service ID" />
+      <div class="img-caption">Your Service ID is shown under Email Services</div>
+      <div class="img-note">⬆ Copy your own Service ID from this page — it starts with "service_"</div>
+    </div>
+  </section>
+
+  <!-- ── Step 5 ── -->
+  <section class="step-card" data-step="5">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">Create an Email Template — Template ID</div>
+        <div class="step-desc">The template tells EmailJS what the order email should look like.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Click <strong>"Email Templates"</strong> in the left sidebar.</div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Click <strong>"Create New Template."</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>Set the <strong>Subject</strong> to: <code>Lab Order Request - &#123;&#123;lab_name&#125;&#125;</code></div>
+      </li>
+      <li>
+        <div class="step-bubble">4</div>
+        <div>In the <strong>Body</strong>, delete everything and type only: <code>&#123;&#123;order_list&#125;&#125;</code></div>
+      </li>
+      <li>
+        <div class="step-bubble">5</div>
+        <div>Click <strong>Save.</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">6</div>
+        <div><strong>Copy the Template ID</strong> shown on the template card — it looks like: <code>template_xxxxxxx</code></div>
+      </li>
+    </ol>
+
+    <div class="callout warn">
+      <span class="callout-icon">⚠️</span>
+      <div>When entering your Template ID into LabTrack, paste the <strong>full ID including "template_"</strong> at the start. Do not remove the prefix.</div>
+    </div>
+
+    <div class="setup-img-wrap">
+      <img src="setup-img-templates.png" alt="EmailJS Email Templates page showing the Template ID" />
+      <div class="img-caption">Your Template ID is shown on the Email Templates page</div>
+      <div class="img-note">⬆ Copy your own Template ID — it starts with "template_"</div>
+    </div>
+  </section>
+
+  <!-- ── Step 6 ── -->
+  <section class="step-card" data-step="6">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Get Your Public Key</div>
+        <div class="step-desc">The Public Key authenticates your browser with EmailJS when sending.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Click <strong>"Account"</strong> in the left EmailJS sidebar.</div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Your <strong>Public Key</strong> is shown under "API Keys."</div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div><strong>Copy it.</strong> It looks like a random string of letters and numbers, about 20 characters long.</div>
+      </li>
+    </ol>
+
+    <div class="setup-img-wrap">
+      <img src="setup-img-account.png" alt="EmailJS Account page showing the Public Key under API Keys" />
+      <div class="img-caption">Your Public Key is found under Account &rsaquo; API Keys</div>
+      <div class="img-note">⬆ Copy your own Public Key — do not share this with anyone</div>
+    </div>
+  </section>
+
+  <!-- ── Step 7 ── -->
+  <section class="step-card" data-step="7">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div>
+        <div class="step-title">Enter Your Credentials into LabTrack</div>
+        <div class="step-desc">Paste the three values you copied from EmailJS into the LabTrack Settings page.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Open LabTrack and tap <strong>Settings</strong> (the gear icon in the bottom tab bar or sidebar).</div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Enter your <strong>Lab Name</strong> and <strong>Researcher Name.</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>Enter the <strong>email address</strong> that order requests should be sent to.</div>
+      </li>
+      <li>
+        <div class="step-bubble">4</div>
+        <div>Paste your <strong>Service ID</strong> (starts with <code>service_</code>) into the Service ID field.</div>
+      </li>
+      <li>
+        <div class="step-bubble">5</div>
+        <div>Paste your <strong>full Template ID</strong> (starts with <code>template_</code>) into the Template ID field.</div>
+      </li>
+      <li>
+        <div class="step-bubble">6</div>
+        <div>Paste your <strong>Public Key</strong> into the Public Key field.</div>
+      </li>
+      <li>
+        <div class="step-bubble">7</div>
+        <div>Tap <strong>Save Settings.</strong></div>
+      </li>
+    </ol>
+
+    <div class="callout navy">
+      <span class="callout-icon">🔒</span>
+      <div>Your credentials are saved only on your device. They are never sent to any server other than EmailJS when you send an order.</div>
+    </div>
+  </section>
+
+  <!-- ── Step 8 ── -->
+  <section class="step-card" data-step="8">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div>
+        <div class="step-title">Import Your Inventory from Excel</div>
+        <div class="step-desc">Optional — you can add items manually or bulk-import from a spreadsheet.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Go to <strong>Settings</strong> and scroll down to <strong>"Import Inventory."</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Tap the upload area and select your <strong>.xlsx or .csv file.</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>A column mapping screen will appear. Match your spreadsheet's column headers to the correct fields:<br>
+          <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+            <code>Item Name</code>
+            <code>Company</code>
+            <code>Catalog #</code>
+            <code>Notes</code>
+            <code>Preset Quantity</code>
+            <code>Preset Unit</code>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="step-bubble">4</div>
+        <div>Tap <strong>Continue</strong> to review the preview, then <strong>Import</strong> to add all items at once.</div>
+      </li>
+    </ol>
+
+    <div class="callout blue">
+      <span class="callout-icon">💡</span>
+      <div><strong>Preset Quantity and Preset Unit</strong> are optional columns. If included, they pre-fill the order quantity and unit each time an item is pushed to the reorder queue.</div>
+    </div>
+  </section>
+
+  <!-- ── Step 9 ── -->
+  <section class="step-card" data-step="9">
+    <div class="step-header">
+      <div class="step-num">9</div>
+      <div>
+        <div class="step-title">Send a Test Order</div>
+        <div class="step-desc">Confirm everything is working end-to-end before relying on LabTrack for real orders.</div>
+      </div>
+    </div>
+    <ol class="steps-list">
+      <li>
+        <div class="step-bubble">1</div>
+        <div>Go to the <strong>Inventory</strong> tab and tap <strong>+ Add</strong> to create a test item.</div>
+      </li>
+      <li>
+        <div class="step-bubble">2</div>
+        <div>Tap the item to select it, then tap <strong>"Push to Reorder"</strong> to add it to your reorder queue.</div>
+      </li>
+      <li>
+        <div class="step-bubble">3</div>
+        <div>Go to the <strong>Reorder</strong> tab, adjust the quantity if needed, then tap <strong>"Send Order Request."</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">4</div>
+        <div>Review the order preview and tap <strong>Send.</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">5</div>
+        <div><strong>Check your email inbox</strong> — the order request should arrive within a few seconds. If it doesn't, double-check your credentials in Settings.</div>
+      </li>
+    </ol>
+
+    <div class="callout blue">
+      <span class="callout-icon">✅</span>
+      <div>If the email arrives, LabTrack is fully set up and ready to use. You can delete the test item from the Inventory tab.</div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <p>Need help? Contact your lab administrator.</p>
+    <p><strong>Built for research labs. Powered by LabTrack.</strong></p>
+  </footer>
+
+</div>
+
+<script>
+  const steps = document.querySelectorAll(".step-card[data-step]");
+  const label = document.getElementById("progress-label");
+  const fill  = document.getElementById("progress-fill");
+  const total = steps.length;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const n = parseInt(entry.target.dataset.step, 10);
+        label.textContent = `Step ${n} of ${total}`;
+        fill.style.width  = `${Math.round((n / total) * 100)}%`;
+      }
+    });
+  }, { rootMargin: "-40% 0px -40% 0px", threshold: 0 });
+
+  steps.forEach((s) => observer.observe(s));
+</script>
+
+</body>
+</html>
