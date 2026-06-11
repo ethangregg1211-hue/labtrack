@@ -649,8 +649,7 @@ const Pages = {
         info.appendChild(el("div", { className: "reorder-queue-sub", textContent: subParts.join(" · ") }));
         topRow.appendChild(info);
 
-        const removeBtn = el("button", { className: "reorder-queue-remove", "aria-label": "Remove from queue" });
-        removeBtn.appendChild(svgIcon(`<path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>`, 20));
+        const removeBtn = el("button", { className: "reorder-queue-remove", "aria-label": "Remove from queue", textContent: "×" });
         removeBtn.addEventListener("click", () => {
           const updated = Storage.getReorderQueue().filter((id) => id !== item.id);
           Storage.saveReorderQueue(updated);

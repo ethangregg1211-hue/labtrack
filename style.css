@@ -1540,11 +1540,12 @@ svg {
 .reorder-queue-sub { font-size: 12px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .reorder-queue-qty { font-size: 12px; font-family: var(--font-mono); color: var(--muted); margin-top: 4px; }
 .reorder-queue-remove {
-  width: 20px; height: 20px;
-  border: none; background: none;
-  color: #94a3b8; cursor: pointer;
+  min-width: 32px; min-height: 32px;
+  border: none; background: none; box-shadow: none;
+  color: #64748b; cursor: pointer;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   padding: 0;
+  font-size: 18px; line-height: 1;
   transition: color 0.15s ease;
 }
 .reorder-queue-remove:hover,
