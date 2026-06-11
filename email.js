@@ -52,11 +52,11 @@ const Email = {
       item_count:      String(items.length),
     };
 
-    console.log("LabTrack — EmailJS params");
+    console.log("LabTrack — EmailJS credentials (exact values passed to SDK)");
+    console.log("  serviceId:  ", s.emailjsServiceId);
+    console.log("  templateId: ", s.emailjsTemplateId);
+    console.log("  publicKey:  ", s.emailjsPublicKey);
     console.log("  to_email:   ", toEmail);
-    console.log("  serviceID:  ", s.emailjsServiceId);
-    console.log("  templateID: ", s.emailjsTemplateId);
-    console.log("  raw localStorage settings:", localStorage.getItem("labtrack_settings"));
 
     try {
       const result = await emailjs.send(s.emailjsServiceId, s.emailjsTemplateId, params);

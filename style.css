@@ -1546,10 +1546,11 @@ svg {
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   padding: 0;
   font-size: 18px; line-height: 1;
+  touch-action: manipulation;
   transition: color 0.15s ease;
 }
-.reorder-queue-remove:hover,
 .reorder-queue-remove:active { color: #ef4444; }
+.reorder-queue-remove:focus { outline: none; color: #64748b; }
 
 /* ── Order history ───────────────────────────────────────────────────────── */
 .history-list { display: flex; flex-direction: column; gap: 10px; }

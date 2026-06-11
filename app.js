@@ -792,9 +792,7 @@ const Pages = {
     emailjsFields.forEach(({ key, label, hint, placeholder }) => {
       const grp   = el("div", { className: "form-group" });
       const input = el("input", { className: "form-input mono", type: "text", placeholder });
-      let displayVal = s[key] || "";
-      if (key === "emailjsTemplateId") displayVal = displayVal.replace(/^template_/, "");
-      input.value = displayVal;
+      input.value = s[key] || "";
       inputs[key] = input;
       grp.appendChild(el("label",  { className: "form-label", textContent: label }));
       grp.appendChild(input);
@@ -844,11 +842,7 @@ const Pages = {
     saveBtn.addEventListener("click", () => {
       const updates = {};
       for (const [key, input] of Object.entries(inputs)) {
-        let val = input.type === "checkbox" ? input.checked : input.value.trim();
-        if (key === "emailjsTemplateId" && typeof val === "string") {
-          val = val.replace(/^template_/, "");
-        }
-        updates[key] = val;
+        updates[key] = input.type === "checkbox" ? input.checked : input.value.trim();
       }
       Storage.saveSettings(updates);
       App.updateLabName();
