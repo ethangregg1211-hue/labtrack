@@ -449,17 +449,32 @@
       </li>
       <li>
         <div class="step-bubble">4</div>
-        <div>In the <strong>Body</strong>, delete everything and type only: <code>&#123;&#123;order_list&#125;&#125;</code></div>
+        <div>In the <strong>Body</strong>, delete everything and type only: <code>&#123;&#123;order_details&#125;&#125;</code></div>
       </li>
       <li>
         <div class="step-bubble">5</div>
-        <div>Click <strong>Save.</strong></div>
+        <div>In the <strong>right-side panel</strong> of the template editor, fill in these fields:
+          <div style="margin-top:10px; display:flex; flex-direction:column; gap:6px;">
+            <div><strong>To Email:</strong> <code>&#123;&#123;to_email&#125;&#125;</code></div>
+            <div><strong>From Name:</strong> <code>&#123;&#123;name&#125;&#125;</code></div>
+            <div><strong>Reply To:</strong> <code>&#123;&#123;to_email&#125;&#125;</code></div>
+          </div>
+        </div>
       </li>
       <li>
         <div class="step-bubble">6</div>
+        <div>Click <strong>Save.</strong></div>
+      </li>
+      <li>
+        <div class="step-bubble">7</div>
         <div><strong>Copy the Template ID</strong> shown on the template card — it looks like: <code>template_xxxxxxx</code></div>
       </li>
     </ol>
+
+    <div class="setup-img-wrap">
+      <img src="setup-img-template-editor.png" alt="EmailJS template editor showing subject, body, and right-side panel fields" />
+      <div class="img-caption">The EmailJS template editor — fill in the Subject, Body, and right-side panel fields as shown</div>
+    </div>
 
     <div class="callout warn">
       <span class="callout-icon">⚠️</span>
