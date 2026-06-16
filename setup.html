@@ -184,6 +184,17 @@
     }
     .steps-list li strong { font-weight: 600; color: var(--navy); }
 
+    .sub-steps {
+      margin: 10px 0;
+      padding-left: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .sub-steps li { padding-left: 4px; }
+
     /* ── Code / ID chips ── */
     code {
       background: var(--surface);
@@ -408,6 +419,14 @@
         <div class="step-bubble">4</div>
         <div>Click <strong>"Connect Account"</strong> and sign in with your email address.</div>
       </li>
+    </ol>
+
+    <div class="callout blue">
+      <span class="callout-icon">💡</span>
+      <div>The email account you connect here is the account EmailJS will <strong>send from</strong> — it is not necessarily the email that receives the order requests. You'll set the <strong>destination email</strong> (where orders are sent to) separately in LabTrack's Settings page. You can connect any email account you have access to here.</div>
+    </div>
+
+    <ol class="steps-list" style="margin-top:16px;">
       <li>
         <div class="step-bubble">5</div>
         <div>Click <strong>"Create Service."</strong></div>
@@ -417,6 +436,16 @@
         <div>Your service will appear in the list. <strong>Copy the Service ID</strong> — it looks like: <code>service_xxxxxxx</code></div>
       </li>
     </ol>
+
+    <div class="callout navy">
+      <span class="callout-icon">🔁</span>
+      <div>Your <strong>Service ID</strong> is tied to your EmailJS account. If you open LabTrack on a new device, you'll need to re-enter it in Settings — credentials are stored locally on each device and are not synced between them.</div>
+    </div>
+
+    <div class="callout blue">
+      <span class="callout-icon">📋</span>
+      <div>Paste your Service ID into a Notes app, Word doc, or email draft right now so you have it ready to paste into LabTrack Settings in Step 7.</div>
+    </div>
 
     <div class="setup-img-wrap">
       <img src="setup-img-services.png" alt="EmailJS Email Services page showing the Service ID" />
@@ -431,7 +460,7 @@
       <div class="step-num">5</div>
       <div>
         <div class="step-title">Create an Email Template — Template ID</div>
-        <div class="step-desc">The template tells EmailJS what the order email should look like.</div>
+        <div class="step-desc">The template tells EmailJS what the order email should look like. Everything in this step happens inside the EmailJS dashboard — you won't switch back to LabTrack until Step 7.</div>
       </div>
     </div>
     <ol class="steps-list">
@@ -441,7 +470,7 @@
       </li>
       <li>
         <div class="step-bubble">2</div>
-        <div>Click <strong>"Create New Template."</strong></div>
+        <div>Click on the existing default template called <strong>"Contact Us"</strong> to open it. You do not need to create a new template — you'll edit the fields already inside it.</div>
       </li>
       <li>
         <div class="step-bubble">3</div>
@@ -450,11 +479,12 @@
       <li>
         <div class="step-bubble">4</div>
         <div>
-          <div class="callout warn" style="margin-top:0; margin-bottom:12px;">
-            <span class="callout-icon">⚠️</span>
-            <div>To edit the body, click <strong>"Edit Content"</strong> in the top right of the Content area, then switch to <strong>Code Editor</strong> view.</div>
-          </div>
-          In the <strong>Body</strong>, delete everything and paste exactly this:
+          Edit the template body:
+          <ol class="sub-steps">
+            <li>Click <strong>"Edit Content"</strong> in the top right corner of the Content area.</li>
+            <li>Click <strong>"Code Editor"</strong> to switch to plain text mode.</li>
+            <li>Delete the existing content and paste exactly this:</li>
+          </ol>
           <pre style="margin-top:10px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 16px; font-family:ui-monospace,'SF Mono',monospace; font-size:13px; color:var(--navy); line-height:1.7; overflow-x:auto; white-space:pre;">Lab: &#123;&#123;lab_name&#125;&#125;
 Requested by: &#123;&#123;researcher_name&#125;&#125;
 Items to reorder:
@@ -478,7 +508,7 @@ Sent from LabTrack</pre>
       </li>
       <li>
         <div class="step-bubble">7</div>
-        <div><strong>Copy the Template ID</strong> shown on the template card — it looks like: <code>template_xxxxxxx</code></div>
+        <div>Click <strong>"Email Templates"</strong> in the left sidebar again to return to the template list, then find your template's card and <strong>copy the Template ID</strong> — it looks like: <code>template_xxxxxxx</code></div>
       </li>
     </ol>
 
@@ -490,6 +520,16 @@ Sent from LabTrack</pre>
     <div class="callout warn">
       <span class="callout-icon">⚠️</span>
       <div>When entering your Template ID into LabTrack, paste the <strong>full ID including "template_"</strong> at the start. Do not remove the prefix.</div>
+    </div>
+
+    <div class="callout navy">
+      <span class="callout-icon">🔁</span>
+      <div>Your <strong>Template ID</strong> is tied to your EmailJS account. If you open LabTrack on a new device, you'll need to re-enter it in Settings — credentials are stored locally on each device and are not synced between them.</div>
+    </div>
+
+    <div class="callout blue">
+      <span class="callout-icon">📋</span>
+      <div>Paste your Template ID into a Notes app, Word doc, or email draft right now so you have it ready to paste into LabTrack Settings in Step 7.</div>
     </div>
 
     <div class="setup-img-wrap">
@@ -522,6 +562,11 @@ Sent from LabTrack</pre>
         <div><strong>Copy it.</strong> It looks like a random string of letters and numbers, about 20 characters long.</div>
       </li>
     </ol>
+
+    <div class="callout blue">
+      <span class="callout-icon">📋</span>
+      <div>Paste your Public Key into a Notes app, Word doc, or email draft right now so you have it ready to paste into LabTrack Settings in Step 7.</div>
+    </div>
 
     <div class="setup-img-wrap">
       <img src="setup-img-account.png" alt="EmailJS Account page showing the Public Key under API Keys" />
