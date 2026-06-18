@@ -9,6 +9,7 @@ const KEYS = {
   ACTIVITY:      "labtrack_activity",
   REORDER_QUEUE: "labtrack_reorder_queue",
   ORDER_HISTORY: "labtrack_order_history",
+  LAST_IMPORT:   "labtrack_last_import",
 };
 
 // ── Utilities ──────────────────────────────────────────────────────────────
@@ -203,6 +204,16 @@ function getActivity() {
   return readJSON(KEYS.ACTIVITY) || [];
 }
 
+// ── Last import ────────────────────────────────────────────────────────────
+
+function getLastImport() {
+  return readJSON(KEYS.LAST_IMPORT) || null;
+}
+
+function saveLastImport(filename) {
+  writeJSON(KEYS.LAST_IMPORT, { filename, date: now() });
+}
+
 // ── Public API ─────────────────────────────────────────────────────────────
 
 window.Storage = {
@@ -220,5 +231,7 @@ window.Storage = {
   saveReorderQueue,
   getOrderHistory,
   addOrderToHistory,
+  getLastImport,
+  saveLastImport,
   CONFIG,
 };

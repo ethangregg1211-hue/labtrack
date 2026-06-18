@@ -247,6 +247,12 @@ const Pages = {
     });
     page.appendChild(statGrid);
 
+    const lastImport = Storage.getLastImport();
+    if (lastImport) {
+      const d = new Date(lastImport.date).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+      page.appendChild(el("div", { className: "text-muted", textContent: `Last import: ${lastImport.filename} — ${d}`, style: "font-size:12px; margin-top:-4px; margin-bottom:16px" }));
+    }
+
     // Quick actions
     page.appendChild(el("div", { className: "section-heading", textContent: "Quick Actions" }));
     const actionGrid = el("div", { className: "module-grid" });
@@ -1355,6 +1361,13 @@ const Importer = {
     });
 
     section.appendChild(dropZone);
+
+    const lastImport = Storage.getLastImport();
+    if (lastImport) {
+      const d = new Date(lastImport.date).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+      section.appendChild(el("div", { className: "form-hint", textContent: `Last import: ${lastImport.filename} — ${d}`, style: "margin-top:10px" }));
+    }
+
     return section;
   },
 
@@ -1380,9 +1393,9 @@ const Importer = {
       const unmatched = headers.filter((h) => !mapping[h]);
 
       if (unmatched.length > 0) {
-        this.showMappingModal(headers, mapping, rows);
+        this.showMappingModal(headers, mapping, rows, file.name);
       } else {
-        this.showConfirmModal(headers, mapping, rows);
+        this.showConfirmModal(headers, mapping, rows, file.name);
       }
     } catch (err) {
       showToast(err.message || "Failed to read file", "error");
@@ -1481,7 +1494,7 @@ const Importer = {
 
   // ── Column mapping modal ─────────────────────────────────────────────────
 
-  showMappingModal(headers, autoMapping, rows) {
+  showMappingModal(headers, autoMapping, rows, filename) {
     const content = el("div", {});
 
     const xBtn = closeX();
@@ -1536,7 +1549,7 @@ const Importer = {
         return;
       }
       closeModal();
-      this.showConfirmModal(headers, resolvedMapping, rows);
+      this.showConfirmModal(headers, resolvedMapping, rows, filename);
     });
 
     content.appendChild(el("div", { className: "modal-footer" }, cancelBtn, nextBtn));
@@ -1545,7 +1558,7 @@ const Importer = {
 
   // ── Import confirm modal ─────────────────────────────────────────────────
 
-  showConfirmModal(headers, mapping, rows) {
+  showConfirmModal(headers, mapping, rows, filename) {
     const items = this.rowsToItems(headers, rows, mapping);
     if (items.length === 0) {
       showToast("No valid rows found. Make sure the Item Name column is mapped.", "error");
@@ -1603,7 +1616,7 @@ const Importer = {
     const importBtn = el("button", { className: "btn btn-primary", textContent: `Import ${items.length} Item${items.length !== 1 ? "s" : ""}` });
     importBtn.addEventListener("click", () => {
       const mode = replaceRadio.checked ? "replace" : "merge";
-      const count = this.doImport(items, mode);
+      const count = this.doImport(items, mode, filename);
       App.updateBadges();
       closeModal();
       showToast(`Imported ${count} item${count !== 1 ? "s" : ""}. Inventory updated.`);
@@ -1617,11 +1630,12 @@ const Importer = {
 
   // ── Execute import ───────────────────────────────────────────────────────
 
-  doImport(items, mode) {
+  doImport(items, mode, filename) {
     if (mode === "replace") {
       Storage.getItems().forEach((i) => Storage.deleteItem(i.id));
     }
     items.forEach((item) => Storage.saveItem(item));
+    if (filename) Storage.saveLastImport(filename);
     return items.length;
   },
 };
